@@ -1,0 +1,10 @@
+ID_Caso,Regla_Asociada,Tipo_Caso,Descripción del Escenario,Datos de Entrada (Entidades / VOs),Resultado Esperado
+TC-01,RN-01,Éxito,Cliente reserva vehículo disponible con licencia vigente.,"Vehículo ID: V-001 (DISPONIBLE), Licencia: Vigente hasta 2028.",Reservación creada exitosamente con estatus CONFIRMADA.
+TC-02,RN-01,Error,Cliente intenta reservar con licencia vencida.,"Vehículo ID: V-002 (DISPONIBLE), Licencia: Vencida en 2025.",Excepción de dominio: LicenciaVencidaError.
+TC-03,RN-01,Límite,Licencia expira exactamente el mismo día del inicio de la renta.,"Fecha inicio renta: Hoy, Licencia expira: Hoy a las 00:00.",Reservación rechazada por expiración de vigencia (LicenciaVencidaError).
+TC-04,RN-02,Éxito,Devolución puntual dentro del margen permitido.,"Fecha pactada: 12:00, Fecha devolución: 11:45.",Sin cargos extra aplicados (total_cargos = 0.0).
+TC-05,RN-02,Error,Devolución con retraso severo de 4 horas.,"Fecha pactada: 12:00, Fecha devolución: 16:00 (Gracia: 30 min).",Cálculo automático de cargo extra por 4 horas de retraso.
+TC-06,RN-02,Límite,Devolución exactamente en el minuto final de tolerancia (30 min).,"Fecha pactada: 12:00, Fecha devolución: 12:30.",Cero cargos extra aplicados (dentro del periodo de tolerancia).
+TC-07,RN-03,Éxito,Categoría Compacta agotada; se otorga categoría SUV al mismo costo.,"Solicitud: Compacta (Agotada), Stock SUV: Disponible.",Asignación de vehículo SUV con tarifa base de Compacta.
+TC-08,RN-03,Error,Categoría solicitada agotada y no hay categorías superiores disponibles.,"Solicitud: Lujo (Agotada), Stock superior: Vacío.",Excepción de dominio: SinVehiculosDisponiblesParaCompensacionError.
+TC-09,RN-03,Límite,Último vehículo de categoría superior asignado justo al límite del inventario.,Stock SUV superior: Exactamente 1 unidad restante.,Asignación exitosa del último vehículo y actualización de inventario a 0.
